@@ -4,6 +4,7 @@ import React, { ChangeEvent, useState } from 'react';
 import CharmItem from './CharmItem';
 import { Charm, ICharm } from '../interface/Charm';
 import BottomSheet from './BottomSheet/BottomSheet';
+import { useCartStore } from "@/store/zustand";
 
 const charms: ICharm[] = [
     {
@@ -99,6 +100,8 @@ const CharmList = () => {
     const [isOpenedBottomSheet, setIsOpenedBottomSheet] = useState<boolean>(false);
     const [quantity, setQuantity] = useState<number>(1);
 
+    const {add: handleAddToCart} = useCartStore();
+
     const handleClickBuy = () => {
         console.log('buy');
     };
@@ -123,7 +126,8 @@ const CharmList = () => {
     }
 
     const handleClickAddToCartInBottomSheet = () => {
-
+        setIsOpenedBottomSheet(false);
+        handleAddToCart(quantity);
     }
 
 
@@ -147,6 +151,7 @@ const CharmList = () => {
                 onChangeQuantity={handleQuantityChange} 
                 onClickQuantity={handleQuantityClick} 
                 onClickCloseButton={handleCloseBottomSheet} 
+                onClickAddToCartInBottomSheet={handleClickAddToCartInBottomSheet}
                 isOpened={isOpenedBottomSheet} 
                 data={selectedCharm} />
         </div>

@@ -9,11 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.18",
     "classnames": "^2.5.1",
     "next": "14.0.4",
     "preline": "^2.0.3",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zustand": "^4.4.7"
   },
   "devDependencies": {
     "@types/node": "^20",
