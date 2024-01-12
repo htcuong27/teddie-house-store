@@ -17,7 +17,7 @@ const ButtonWithIcon = ({ children, onClick, color = 'normal' }: ButtonWithIconP
         'alert': 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200',
         'invisible': 'text-black'
     };
-    const defaultStyleButton = 'w-full py-2 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent disabled:opacity-50 disabled:pointer-events-none';
+    const defaultStyleButton = 'w-full py-2 inline-flex items-center gap-x-2 text-sm rounded-lg border border-transparent disabled:opacity-50 disabled:pointer-events-none';
     const flexText = 'flex flex-col-reverse justify-content items-center gap-1 text-nowrap';
     return (
 
