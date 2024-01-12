@@ -109,6 +109,7 @@ const CharmList = () => {
     const handleClickAddToCart = (charmItem: Charm) => {
         setIsOpenedBottomSheet(true);
         setSelectedCharm(charmItem);
+        setQuantity(1);
     };
 
     const handleCloseBottomSheet = () => {

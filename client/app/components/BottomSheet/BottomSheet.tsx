@@ -50,7 +50,7 @@ const BottomSheet = ({
                     </Transition>
                     <Transition
                         appear={true}
-                        className={`fixed bottom-0 flex flex-col left-0 bg-white border shadow-sm max-h-[70%] min-h-[30%] h-fit w-full rounded-tl-md rounded-tr-md `}
+                        className={`fixed bottom-0 flex flex-col left-0 bg-white border shadow-sm max-h-[70%] h-fit w-full rounded-tl-md rounded-tr-md `}
                         show={isOpened}
                         enter="transition ease-in-out duration-400 transform"
                         enterFrom="translate-y-full"

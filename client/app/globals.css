@@ -12,6 +12,7 @@
 body {
   color: rgb(var(--foreground-rgb));
   -webkit-font-smoothing: antialiased;
+  position: relative;
   overscroll-behavior: none;
   background: white;
   margin: 0;
