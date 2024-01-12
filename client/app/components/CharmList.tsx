@@ -134,6 +134,7 @@ const CharmList = () => {
                 {
                     charms.map(charm => (
                         <CharmItem 
+                            isActive={(isOpenedBottomSheet && selectedCharm?.id === charm.id) ? true : false}
                             key={charm.id} 
                             charm={charm} 
                             onClickBuy={handleClickBuy}
@@ -141,7 +142,13 @@ const CharmList = () => {
                     ))
                 }
             </ul>
-            <BottomSheet quantity={quantity} onChangeQuantity={handleQuantityChange} onClickQuantity={handleQuantityClick} onClickCloseButton={handleCloseBottomSheet} isOpened={isOpenedBottomSheet} data={selectedCharm} />
+            <BottomSheet 
+                quantity={quantity} 
+                onChangeQuantity={handleQuantityChange} 
+                onClickQuantity={handleQuantityClick} 
+                onClickCloseButton={handleCloseBottomSheet} 
+                isOpened={isOpenedBottomSheet} 
+                data={selectedCharm} />
         </div>
     );
 };

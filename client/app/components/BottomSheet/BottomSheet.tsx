@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useEffect } from 'react';
 import ButtonWithIcon from '../ButtonWithIcon';
 import CloseIcon from '@/app/svgs/CloseIcon';
 import { Charm } from '@/app/interface/Charm';
@@ -24,11 +24,17 @@ const BottomSheet = ({ data, onClickCloseButton, onClickQuantity, quantity, onCh
         'translate-y-0': isOpened
     });
 
+    useEffect(() => {
+        isOpened
+          ? (document.body.style.overflow = 'hidden')
+          : (document.body.style.overflow = 'auto');
+      }, [isOpened]);
+
     return (
         <>
             {/* Background overlay */}
             <div className={`fixed transition-all duration-700 top-0 left-0 right-0 bottom-0 bg-black bg-opacity-30 pointer-events-none ${bottomSheetLogicClass}`}></div>
-            <div className={`fixed bottom-0 flex flex-col left-0 bg-white max-h-[70%] h-1/2 w-full rounded-tl-lg rounded-tr-lg transition-[transform] duration-1000 -translate-y-full ${animationPopup} ${bottomSheetLogicClass}`}>
+            <div className={`fixed bottom-0 flex flex-col left-0 bg-white max-h-[70%] h-fit w-full rounded-tl-lg rounded-tr-lg transition-[transform] duration-1000 -translate-y-full ${animationPopup} ${bottomSheetLogicClass}`}>
                 {/* Close Button */}
                 <div className='absolute top-0 right-0 flex flex-row-reverse px-4 z-10'>
                     <ButtonWithIcon
@@ -74,7 +80,7 @@ const BottomSheet = ({ data, onClickCloseButton, onClickQuantity, quantity, onCh
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h16" />
                                 </svg>
                             </button>
-                            <input type="numeric" className="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
+                            <input inputMode="numeric" pattern="[0-9]*" type="text" className="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
                                 value={quantity} onChange={(e) => onChangeQuantity(e)} />
                             <button type="button" onClick={() => onClickQuantity(1)} className="bg-gray-100  hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none">
                                 <svg className="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
@@ -84,7 +90,7 @@ const BottomSheet = ({ data, onClickCloseButton, onClickQuantity, quantity, onCh
                         </div>
                     </div>
                 </div>
-                <div className='p-4 w-full shadow-[-2px_-18px_15px_-3px_rgba(0,0,0,0.1)] relative z-10'>
+                <div className='p-4 w-full shadow-[0px_-11px_15px_-3px_rgba(0,0,0,0.1)] relative z-10'>
                     <ButtonWithIcon color={'success'} onClick={() => { }} >
                         <p className="text-lg">Thêm Vào Giỏ Hàng</p>
                     </ButtonWithIcon>

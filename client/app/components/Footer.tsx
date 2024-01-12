@@ -5,9 +5,9 @@ const Footer = () => {
     <footer className="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
       {/* Grid */}
       <div className="text-center">
-        <div>
+        {/* <div>
           <a className="flex-none text-xl font-semibold text-black dark:text-white dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="#" aria-label="Brand">Brand</a>
-        </div>
+        </div> */}
         {/* End Col */}
 
         <div className="mt-3">

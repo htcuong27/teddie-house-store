@@ -8,7 +8,7 @@ const Header = () => {
             <nav className="mt-6 relative w-full bg-white border border-gray-200 rounded-[36px] mx-2 py-3 px-6 md:flex md:items-center md:justify-between md:py-0" aria-label="Global">
                 <div className="flex items-center justify-center gap-3 w-full">
                     <Image className='aspect-square object-contain rounded-[50%] border border-gray-200' width={40} height={40} src="/teddiehouse.jpg" alt="" />
-                    <a className="w-fit md:mr-auto text-xl font-semibold flex flex-row justify-start items-center flex-1" href="#" aria-label="Brand">
+                    <a className="w-fit md:mr-auto text-xl font-[500] flex flex-row justify-start items-center flex-1" href="#" aria-label="Brand">
                         <h1 className='tracking-widest'>
                             <span className='text-[#ca8360]'>TEDDIE</span>&nbsp;
                             <span className='text-[#735a32]'>HOUSE</span>
