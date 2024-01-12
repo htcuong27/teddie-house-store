@@ -11,6 +11,8 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
   background: white;
   margin: 0;
   padding: 0;
