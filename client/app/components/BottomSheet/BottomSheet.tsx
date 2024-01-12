@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { ChangeEvent, useCallback, useEffect, useLayoutEffect, useRef } from 'react';
 import ButtonWithIcon from '../ButtonWithIcon';
 import CloseIcon from '@/app/svgs/CloseIcon';
 import { Charm } from '@/app/interface/Charm';
@@ -15,26 +15,43 @@ interface BottomSheetProps {
 }
 
 const BottomSheet = ({ data, onClickCloseButton, onClickQuantity, quantity, onChangeQuantity, isOpened = false }: BottomSheetProps) => {
-
     const bottomSheetLogicClass = classNames({
-        'hidden': !isOpened
+        'hidden': !isOpened,
     });
 
     const animationPopup = classNames({
         'translate-y-0': isOpened
     });
 
+    const preventEvent = useCallback((event: Event) => {
+        event.preventDefault();
+    }, []);
+
     useEffect(() => {
         isOpened
-          ? (document.body.style.overflow = 'hidden')
-          : (document.body.style.overflow = 'auto');
-      }, [isOpened]);
+            ? (
+                document.body.style.overflow = 'hidden',
+                document.body.addEventListener('touchstart', preventEvent),
+                document.body.addEventListener('touchmove', preventEvent),
+                document.body.addEventListener('touchend', preventEvent)
+            )
+            : (
+                document.body.style.overflow = 'auto',
+                document.body.removeEventListener('touchstart', preventEvent),
+                document.body.addEventListener('touchmove', preventEvent),
+                document.body.addEventListener('touchend', preventEvent));
+        return () => {
+            document.body.removeEventListener('touchstart', preventEvent);
+            document.body.addEventListener('touchmove', preventEvent);
+            document.body.addEventListener('touchend', preventEvent);
+        };
+    }, [isOpened]);
 
     return (
         <>
             {/* Background overlay */}
             <div className={`fixed transition-all duration-700 top-0 left-0 right-0 bottom-0 bg-black bg-opacity-30 pointer-events-none ${bottomSheetLogicClass}`}></div>
-            <div className={`fixed bottom-0 flex flex-col left-0 bg-white max-h-[70%] h-fit w-full rounded-tl-lg rounded-tr-lg transition-[transform] duration-1000 -translate-y-full ${animationPopup} ${bottomSheetLogicClass}`}>
+            <div className={`fixed bottom-0 flex flex-col left-0 bg-white max-h-[70%] w-full rounded-tl-lg rounded-tr-lg transition-[transform] duration-1000 -translate-y-full ${animationPopup} ${bottomSheetLogicClass}`}>
                 {/* Close Button */}
                 <div className='absolute top-0 right-0 flex flex-row-reverse px-4 z-10'>
                     <ButtonWithIcon
