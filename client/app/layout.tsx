@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
 import PrelineScript from './components/PrelineScript';
 import './globals.css';
+import ScrollFix from './components/ScrollFix';
 
 const roboto = Roboto({
   weight: ["400", "500", "700"],  
@@ -21,6 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>{children}</body>
+      <ScrollFix />
       <PrelineScript />
     </html>
   );
