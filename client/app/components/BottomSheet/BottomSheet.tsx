@@ -80,7 +80,7 @@ const BottomSheet = ({ data, onClickCloseButton, onClickQuantity, quantity, onCh
                                     <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h16" />
                                 </svg>
                             </button>
-                            <input type="numeric" className="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
+                            <input inputMode="numeric" pattern="[0-9]*" type="text" className="bg-gray-50 border-x-0 border-gray-300 h-11 text-center text-gray-900 text-sm focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5"
                                 value={quantity} onChange={(e) => onChangeQuantity(e)} />
                             <button type="button" onClick={() => onClickQuantity(1)} className="bg-gray-100  hover:bg-gray-200 border border-gray-300 rounded-e-lg p-3 h-11 focus:ring-gray-100 focus:ring-2 focus:outline-none">
                                 <svg className="w-3 h-3 text-gray-900" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18">
@@ -90,7 +90,7 @@ const BottomSheet = ({ data, onClickCloseButton, onClickQuantity, quantity, onCh
                         </div>
                     </div>
                 </div>
-                <div className='p-4 w-full shadow-[-2px_-18px_15px_-3px_rgba(0,0,0,0.1)] relative z-10'>
+                <div className='p-4 w-full shadow-[0px_-11px_15px_-3px_rgba(0,0,0,0.1)] relative z-10'>
                     <ButtonWithIcon color={'success'} onClick={() => { }} >
                         <p className="text-lg">Thêm Vào Giỏ Hàng</p>
                     </ButtonWithIcon>
