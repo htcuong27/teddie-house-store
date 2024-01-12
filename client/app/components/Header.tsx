@@ -9,7 +9,7 @@ const Header = () => {
     const { cart } = useCartStore();
 
     return (
-        <header className="sticky mt-6 mx-2 left-0 right-0 top-0 flex flex-wrap md:justify-start md:flex-nowrap z-50 text-sm">
+        <header className="sticky mt-6 mx-2 left-0 right-0 top-6     flex flex-wrap md:justify-start md:flex-nowrap z-50 text-sm">
             <nav className="relative w-full bg-white border border-gray-200 rounded-[36px] py-3 px-6 md:flex md:items-center md:justify-between md:py-0" aria-label="Global">
                 <div className="flex items-center justify-center gap-3 w-full">
                     <Image className='aspect-square object-contain rounded-[50%] border border-gray-200' width={40} height={40} src="/teddiehouse.jpg" alt="" />

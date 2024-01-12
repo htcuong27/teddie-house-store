@@ -1,14 +1,16 @@
-import Image from 'next/image';
 import CharmList from './components/CharmList';
-import Header from './components/Header';
-import BottomSheet from './components/BottomSheet/BottomSheet';
+import Filter from './components/Filter';
 import Footer from './components/Footer';
+import Header from './components/Header';
 
 export default function Home() {
   return (
     <main>
       <Header />
-      <section className='pt-10 px-4'>
+      <section className='pt-4 px-2'>
+        <Filter />
+      </section>
+      <section className='pt-6 px-4'>
         <CharmList />
       </section>
       <Footer />

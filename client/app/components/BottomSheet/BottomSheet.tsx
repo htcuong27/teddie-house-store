@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect } from 'react';
+import React, { ChangeEvent, useLayoutEffect } from 'react';
 import ButtonWithIcon from '../ButtonWithIcon';
 import CloseIcon from '@/app/svgs/CloseIcon';
 import { Charm } from '@/app/interface/Charm';
@@ -23,7 +23,8 @@ const BottomSheet = ({
     onChangeQuantity,
     onClickAddToCartInBottomSheet,
     isOpened = false }: BottomSheetProps) => {
-    useEffect(() => {
+
+    useLayoutEffect(() => {
         isOpened
             ? (
                 document.body.style.overflow = 'hidden'
