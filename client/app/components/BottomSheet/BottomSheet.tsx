@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { ChangeEvent, useCallback, useEffect } from 'react';
 import ButtonWithIcon from '../ButtonWithIcon';
 import CloseIcon from '@/app/svgs/CloseIcon';
 import { Charm } from '@/app/interface/Charm';
