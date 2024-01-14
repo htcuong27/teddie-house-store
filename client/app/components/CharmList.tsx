@@ -128,7 +128,9 @@ const CharmList = () => {
 
     const handleClickAddToCartInBottomSheet = () => {
         setIsOpenedBottomSheet(false);
-        handleAddToCart(quantity);
+        if (selectedCharm) {
+            handleAddToCart(selectedCharm);
+        }
     }
 
 

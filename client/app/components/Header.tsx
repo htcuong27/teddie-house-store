@@ -1,10 +1,12 @@
-'use client';
 import { useCartStore } from '@/store/zustand';
 import Image from 'next/image';
-import React, { useEffect, useRef } from 'react';
 import ShoppingCartIcon from '../svgs/ShoppingCartIcon';
 
-const Header = () => {
+type HeaderProps = {
+    onClickCart: () => void;
+}
+
+const Header = ({ onClickCart }: HeaderProps) => {
 
     const { cart } = useCartStore();
 
@@ -19,10 +21,12 @@ const Header = () => {
                             <span className='text-[#735a32]'>HOUSE</span>
                         </h1>
                     </a>
-                    <button onClick={() => console.log(cart)} className="ml-auto flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 md:border-s md:border-gray-300 md:my-6 md:ps-6 relative">
+                    <button 
+                        onClick={onClickCart}
+                        className="ml-auto flex items-center gap-x-2 font-medium text-gray-500 focus:p-2 focus:border- hover:text-blue-600 md:border-s md:border-gray-300 md:my-6 md:ps-6 relative">
                         <ShoppingCartIcon />
                         {
-                            cart > 0 && <span className='text-[0.5rem] leading-none line- text-white rounded-full bg-red-500 flex justify-center items-center p-1 absolute -top-2 -left-2 w-1 h-1 box-content'>{cart}</span>
+                            cart.length > 0 && <span className='text-[0.5rem] leading-none line- text-white rounded-full bg-red-500 flex justify-center items-center p-1 absolute -top-2 -left-2 w-1 h-1 box-content'>{cart.length}</span>
                         }
                     </button>
 
