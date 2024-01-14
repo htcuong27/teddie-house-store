@@ -33,7 +33,7 @@ const Cart = ({ onClickClose }: CartProps) => {
                     {
                         cart.length === 0 ? 'Chưa có sản phẩm nào' :
                         cart.map((charm) => (
-                            <div className="bg-white flex justify-between gap-2 px-4 py-3.5 rounded-xl items-start">
+                            <div key={charm.id} className="bg-white flex justify-between gap-2 px-4 py-3.5 rounded-xl items-start">
                                 {/* charm image */}
                                 <div className="items-start flex grow basis-[0%] flex-col justify-center">
                                     <Image
@@ -81,9 +81,10 @@ const Cart = ({ onClickClose }: CartProps) => {
                     <div className="text-gray-700 text-sm font-semibold my-auto">
                         Thêm Mã Giảm Giá
                     </div>
-                    <img
+                    <Image
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/3db2ec3848c4948518de8e1e52596936456f12548c5aa43fe633d23c9221de02?apiKey=bb8dbc989cc34660ac54425ea8f28286&"
+                        alt='down'
                         className="aspect-square object-contain object-center w-6  self-stretch shrink-0 max-w-full"
                     />
                 </span>
