@@ -176,7 +176,7 @@ const CharmList = () => {
                             <div className='flex flex-row flex-wrap gap-4 '>
                                 {selectedCharm.items.map((item, index) => (
                                     <div key={index} className='flex items-center bg-stone-50 p-2 gap-2 shadow-sm border rounded-md hover:bg-slate-300 hover:scale-105 hover:shadow-md transition-all duration-300'>
-                                        <img className='rounded-tl-md rounded-bl-md' width={40} height={40} src={item.imageUrl} alt={item.name} />
+                                        <Image className='rounded-tl-md rounded-bl-md' width={40} height={40} src={item.imageUrl} alt={item.name} />
                                         <p className='overflow-hidden text-ellipsis whitespace-nowrap'>{item.name}</p>
                                     </div>
                                 ))}

@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import ChevronDownIcon from '@/app/svgs/ChevronDownIcon';
 import { useCartStore } from '@/store/zustand';
 import { motion } from 'framer-motion';
@@ -7,11 +7,7 @@ import { useMemo } from 'react';
 import Footer2 from '../components/Footer2';
 import Header2 from '../components/Header2';
 
-type CartProps = {
-    onClickClose: () => void;
-};
-
-const Cart = ({ onClickClose }: CartProps) => {
+const Cart = () => {
 
     const { cart } = useCartStore();
 
