@@ -15,7 +15,18 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --primary-color: #ca8360;
+  --secondary-color: #735A32;
+  --third-color: #DB8B4A;
+  --forth-color: #DEB38D;
+  --fifth-color: #9C9771;
 }
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -26,4 +37,14 @@ body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body > main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch;
 }

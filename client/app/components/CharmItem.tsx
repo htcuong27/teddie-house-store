@@ -1,20 +1,18 @@
-import React, { useState } from 'react';
-import ButtonWithIcon from './ButtonWithIcon';
-import CartIcon from '../svgs/CartIcon';
-import ForwardIcon from '../svgs/ForwardIcon';
-import { Charm, ICharm } from '../interface/Charm';
-import Image from 'next/image';
+import { ArrowRightEndOnRectangleIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 import classNames from 'classnames';
+import Image from 'next/image';
+import { Product } from '../model/Charm';
+import { formatCurrency } from '../ultilites/formatCurrency';
+import ButtonWithIcon from './ButtonWithIcon';
 
-interface CharmItemProps {
+type CharmItemProps = {
     onClickBuy: () => void;
-    onClickAddToCart: (charm: Charm) => void;
-    charm: ICharm;
+    onClickAddToCart: (charm: Product) => void;
+    charm: Product;
     isActive: boolean;
 }
 
 const CharmItem = ({ onClickBuy, onClickAddToCart, isActive, charm }: CharmItemProps) => {
-    const [charmItem, setCharmItem] = useState(new Charm(charm));
 
     const scaleItem = classNames({
         'scale-105': isActive
@@ -32,19 +30,19 @@ const CharmItem = ({ onClickBuy, onClickAddToCart, isActive, charm }: CharmItemP
                 </div>
                 <div className="p-2 pb-0 flex flex-col gap-2">
                     <h3 className="line-clamp-2 text-sm h-10 font-bold text-gray-800 ">
-                        {charmItem.name}
+                        {charm.name}
                     </h3>
                     <p className="text-red-500 text-sm ">
-                        {charmItem.getPriceFormat() || 0}
+                        {formatCurrency(charm.price || 0)}
                     </p>
-                    <div className="grid grid-cols-2 shadow-sm w-[calc(100%+1rem)] ml-[-0.5rem] mt-[1rem]">
-                        <ButtonWithIcon color={'success'} onClick={() => onClickAddToCart(charmItem)}>
+                    <div className="grid grid-cols-2 shadow-sm w-[calc(100%+1rem)] ml-[-0.5rem] mt-[1rem] ">
+                        <ButtonWithIcon color={'orange'} onClick={() => onClickAddToCart(charm)}>
                             <p className="text-[0.5rem]">Thêm vào Giỏ Hàng</p>
-                            <CartIcon />
+                            <ShoppingCartIcon className='w-6 h-4' />
                         </ButtonWithIcon>
-                        <ButtonWithIcon color={'alert'} onClick={onClickBuy}>
+                        <ButtonWithIcon color={'yellow'} onClick={onClickBuy}>
                             <p className="text-[0.5rem]">Mua Ngay</p>
-                            <ForwardIcon />
+                            <ArrowRightEndOnRectangleIcon className='w-6 h-4' />
                         </ButtonWithIcon>
                     </div>
                 </div>

@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
-import PrelineScript from './components/PrelineScript';
 import './globals.css';
 
 const roboto = Roboto({
-  weight: ["400", "500", "700"],  
+  weight: ["400", "500", "700"],
   subsets: ['vietnamese'],
 },);
 
@@ -19,9 +18,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={roboto.className}>{children}</body>
-      <PrelineScript />
+    <html lang="vi">
+      <body className={`h-full overflow-hidden ${roboto.className}`}>
+          {children}
+      </body>
     </html>
   );
 }

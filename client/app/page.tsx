@@ -1,33 +1,24 @@
-'use client';
-
-import { motion } from 'framer-motion';
+'use client'
 import CharmList from './components/CharmList';
+import Footer from './components/Footer';
 import Header from './components/Header';
-
+import PageAnimation from './components/PageAnimation';
+import TabBar from './components/TabBar';
 
 export default function Home() {
 
-
   return (
     <main>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="bg-gray-50 flex flex-col min-h-screen w-full mx-auto"
-      >
+      <PageAnimation>
         <Header />
+        <TabBar />
         <main className='mb-4'>
-          {/* <section className='pt-4 px-2'>
-              <Filter />
-            </section> */}
           <section className='pt-6 px-4'>
             <CharmList />
           </section>
         </main>
-        {/* <Footer /> */}
-      </motion.div>
-
+        <Footer />
+      </PageAnimation>
     </main>
   );
 }

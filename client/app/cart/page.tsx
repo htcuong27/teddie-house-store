@@ -1,23 +1,27 @@
 'use client';
-import ChevronDownIcon from '@/app/svgs/ChevronDownIcon';
-import { useCartStore } from '@/store/zustand';
+
+import { useCartStore } from '@/store/cart';
+import { ChevronDownIcon } from '@heroicons/react/24/outline';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
+import BottomSheet from '../components/BottomSheet/BottomSheet';
 import Footer2 from '../components/Footer2';
 import Header2 from '../components/Header2';
+import { formatCurrency } from '../ultilites/formatCurrency';
 
 const Cart = () => {
+    const [isOpenedBottomSheet, setIsOpenedBottomSheet] = useState(false);
 
-    const { cart } = useCartStore();
+    const { cart, getTotalPrice } = useCartStore();
 
-    const totalQuantity = useMemo(() => {
-        return cart.reduce((acc, charm) => acc + charm.quantity, 0);
-    }, [cart]);
+    // const totalQuantity = useMemo(() => {
+    //     return cart.reduce((acc, charm) => acc + charm.quantity, 0);
+    // }, [cart]);
 
-    const getTotalPrice = useMemo(() => {
-        return cart.reduce((acc, charm) => acc + (charm.minPrice * charm.quantity), 0);
-    }, [cart]);
+    // const getTotalPrice = useMemo(() => {
+    //     return cart.reduce((acc, charm) => acc + (charm.minPrice * charm.quantity), 0);
+    // }, [cart]);
 
     return (
         <motion.div
@@ -30,85 +34,75 @@ const Cart = () => {
             <Header2>Giỏ Hàng Của Bạn</Header2>
             {/* main */}
             <main className="flex-1 items-stretch flex w-full flex-col p-4">
-                <div>
+                <div className='flex flex-col gap-4'>
                     {
                         cart.length === 0 ? 'Chưa có sản phẩm nào' :
                             cart.map((charm) => (
                                 <div key={charm.id} className="bg-white flex justify-between gap-2 px-4 py-3.5 rounded-xl items-start">
                                     {/* charm image */}
-                                    <div className="items-start flex grow basis-[0%] flex-col justify-center">
-                                        <Image
-                                            width={130}
-                                            height={130}
-                                            loading="lazy"
-                                            src={charm.imageUrl}
-                                            alt="charm image"
-                                            className="aspect-square object-contain object-center w-[130px]  rounded-lg"
-                                        />
-                                    </div>
-                                    <span className="items-stretch self-stretch flex grow basis-[0%] flex-col overflow-hidden">
+                                    <Image
+                                        width={130}
+                                        height={130}
+                                        loading="lazy"
+                                        src={charm.imageUrl}
+                                        alt="charm image"
+                                        className="aspect-square object-contain object-center w-[130px]  rounded-lg"
+                                    />
+                                    <div className="flex flex-col gap-2">
                                         {/* charm name */}
-                                        <div className="text-neutral-800 text-base font-semibold">
+                                        <h3 className="line-clamp-2 text-md h-15 font-bold text-gray-800 ">
                                             {charm.name}
-                                        </div>
-                                        {/* charm description */}
-                                        {/* <div className=" text-neutral-800 text-ellipsis whitespace-nowrap text-sm leading-6">
-                                        High-performance leggings with moisture-wicking fabric and
-                                        four-way stretch, ideal for intense workouts
-                                    </div> */}
-                                        {/* charm price */}
-                                        <div className="text-neutral-800 text-lg font-semibold whitespace-nowrap mt-2">
-                                            {charm.getPriceFormat()}
-                                        </div>
-                                        <div className="justify-between border-t-[color:var(--greyscale-Grey-95,#F0F2F5)] flex w-full gap-5 mt-2 pt-2 border-t border-solid items-start">
+                                        </h3>
+                                        <p className="text-red-500 text-sm ">
+                                            {formatCurrency(charm.price)}
+                                        </p>
+                                        <div className="justify-between border-t-[color:var(--greyscale-Grey-95,#F0F2F5)] flex w-full gap-5 pt-2 border-t border-solid items-start">
                                             {/* charm quantity */}
-                                            <span className="flex gap-4 items-start">
-                                                <div className="text-neutral-800 text-center text-xs tracking-wide uppercase">
+                                            <span className="flex gap-4 items-center">
+                                                <h4 className='text-sm font-bold'>
                                                     Số Lượng
-                                                </div>
-                                                <div className="text-neutral-800 text-center text-sm font-semibold self-stretch">
-                                                    {charm.quantity}
-                                                </div>
+                                                </h4>
+                                                <span className='text-sm'>
+                                                    {charm.count}
+                                                </span>
                                             </span>
                                             <span>
-                                                <ChevronDownIcon />
+                                                <div role="button" onClick={() => setIsOpenedBottomSheet(true)}>
+                                                    <ChevronDownIcon className='w-6 h-6' />
+                                                </div>
+                                                {/* Bottom Sheet */}
+                                                <BottomSheet />
                                             </span>
                                         </div>
-                                    </span>
+                                    </div>
                                 </div>
                             ))
                     }
                 </div>
                 {/* Coupon */}
-                <span className="justify-between items-center bg-white flex gap-5 mt-4 p-4 rounded-lg">
+                {/* <span className="justify-between items-center bg-white flex gap-5 mt-4 p-4 rounded-lg">
                     <div className="text-gray-700 text-sm font-semibold my-auto">
                         Thêm Mã Giảm Giá
                     </div>
                     <span className='-rotate-90'>
                         <ChevronDownIcon />
                     </span>
-                    {/* <Image
-                        loading="lazy"
-                        src="https://cdn.builder.io/api/v1/image/assets/TEMP/3db2ec3848c4948518de8e1e52596936456f12548c5aa43fe633d23c9221de02?apiKey=bb8dbc989cc34660ac54425ea8f28286&"
-                        alt='down'
-                        className="aspect-square object-contain object-center w-6  self-stretch shrink-0 max-w-full"
-                    /> */}
-                </span>
+                </span> */}
 
                 {/* Support customer */}
                 <div className="text-neutral-800 text-sm font-semibold leading-6 mt-4">
-                    Hỗ Trợ Khách Hàng: <a href="tel:0702088389" className=" leading-6" >0702088389</a>
+                    <a href="tel:0702088389" className=" leading-6" >Hỗ Trợ Khách Hàng</a>
                 </div>
             </main>
 
             {/* Footer */}
             <Footer2 linkName='Thanh Toán' linkTo='/checkout'>
-                <span className="justify-between items-stretch flex gap-5">
+                {/* <span className="justify-between items-stretch flex gap-5">
                     <div className="text-gray-600 text-sm leading-6">
                         Số Lượng Sản Phẩm
                     </div>
                     <div className="text-neutral-800 text-sm leading-6">{totalQuantity}</div>
-                </span>
+                </span> */}
                 {/* <span className="justify-between items-stretch flex gap-5 mt-1">
                     <div className="text-gray-600 text-sm leading-6">Subtotal</div>
                     <div className="text-neutral-800 text-sm leading-6">$94,98</div>
@@ -122,7 +116,7 @@ const Cart = () => {
                 <span className="justify-between items-stretch flex gap-5 mt-1">
                     <div className="text-gray-600 text-sm leading-6">Total</div>
                     <div className="text-neutral-800 text-sm font-semibold self-start">
-                        {getTotalPrice}
+                        {getTotalPrice()}
                     </div>
                 </span>
             </Footer2>

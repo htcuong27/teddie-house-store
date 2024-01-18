@@ -1,96 +1,82 @@
 'use client';
 
-import { useCartStore } from "@/store/zustand";
+import { useBottomSheetStore, useCartStore } from "@/store/cart";
+import { useNavStore } from "@/store/nav";
 import Image from 'next/image';
-import { ChangeEvent, useState } from 'react';
-import { Charm, ICharm } from '../interface/Charm';
-import MinusIcon from "../svgs/MinusIcon";
-import PlusIcon from "../svgs/PlusIcon";
+import { useState } from 'react';
+import { Product, ProductCategoryType, ProductItem } from '../model/Charm';
+import { formatCurrency } from "../ultilites/formatCurrency";
 import BottomSheet from './BottomSheet/BottomSheet';
-import ButtonWithIcon from './ButtonWithIcon';
 import CharmItem from './CharmItem';
+import Counter from "./Counter";
 
-const charms: ICharm[] = [
+// Mock Data
+const items: Product[] = [
     {
         id: 1,
         name: '[Lựa live] MINI - Charm xinh mini đong ml',
-        size: 'MINI',
-        minPrice: 139000,
-        maxPrice: 139000,
-        quantity: 1000,
+        category: ProductCategoryType.CHARM,
+        price: 139000,
         items: [],
-        imageUrl: 'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/c0e0d040460a451dbff58548b47fd543~tplv-o3syd03w52-origin-jpeg.jpeg'
+        imageUrl: 'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/c0e0d040460a451dbff58548b47fd543~tplv-o3syd03w52-origin-jpeg.jpeg',
+        isDiscountable: false,
+        capacity: 3
+    },
+    {
+        id: 2,
+        name: '[Lựa live] MINI - Charm xinh mini đong ml',
+        category: ProductCategoryType.CHARM,
+        price: 139000,
+        items: [],
+        imageUrl: 'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/c0e0d040460a451dbff58548b47fd543~tplv-o3syd03w52-origin-jpeg.jpeg',
+        isDiscountable: false,
+        capacity: 10
     },
     {
         id: 3,
         name: '[Lựa live] MINI - Charm xinh mini đong ml',
-        size: 'MINI',
-        minPrice: 139000,
-        maxPrice: 139000,
-        quantity: 300,
+        category: ProductCategoryType.CHARM,
+        price: 139000,
         items: [],
-        imageUrl: 'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/c0e0d040460a451dbff58548b47fd543~tplv-o3syd03w52-origin-jpeg.jpeg'
+        imageUrl: 'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/c0e0d040460a451dbff58548b47fd543~tplv-o3syd03w52-origin-jpeg.jpeg',
+        isDiscountable: false,
+        capacity: 100
     },
     {
         id: 4,
-        name: '[Lựa live] MINI - Charm xinh mini đong ml',
-        size: 'MINI',
-        minPrice: 139000,
-        maxPrice: 139000,
-        quantity: 4909,
-        items: [],
-        imageUrl: 'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/c0e0d040460a451dbff58548b47fd543~tplv-o3syd03w52-origin-jpeg.jpeg'
-    },
-    {
-        id: 2,
         name: '[Lựa live] Charm xinh DIY đong ml nhà Teddie',
-        size: 'BIG',
-        minPrice: 89000,
-        maxPrice: 560000,
-        quantity: 1000,
+        category: ProductCategoryType.KEYCHAIN,
+        price: 89000,
+        capacity: 1000,
+        isDiscountable: false,
         items: [
             {
                 price: 89000,
                 capacity: 150,
-                unit: 'ml',
                 name: '150ml',
-                special: 'tặng 1 charm',
-                quantity: 100,
                 imageUrl: 'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/7c14962aa21b4a40ac3e800d28d3e4ad~tplv-o3syd03w52-origin-jpeg.jpeg?from=520841845'
             },
             {
                 price: 149000,
                 capacity: 250,
-                unit: 'ml',
-                special: 'tặng 2 charm',
-                quantity: 200,
                 imageUrl: 'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/c4c698fc768c4f8990077ac3c87095a9~tplv-o3syd03w52-origin-jpeg.jpeg?from=520841845',
                 name: '250ml'
             },
             {
                 price: 199000,
                 capacity: 350,
-                unit: 'ml',
-                special: 'tặng 3 charm',
-                quantity: 300,
                 imageUrl: 'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/f258cfb130394aaaa87c3f71b6461168~tplv-o3syd03w52-origin-jpeg.jpeg?from=520841845',
                 name: '350ml'
             },
             {
                 price: 309000,
                 capacity: 600,
-                unit: 'ml',
-                special: 'tặng 5 charm',
-                quantity: 400,
                 imageUrl: 'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/9892f9df9f0140c0a860eb31ed67dce3~tplv-o3syd03w52-origin-jpeg.jpeg?from=520841845',
                 name: '600ml'
             },
             {
                 price: 560000,
                 capacity: 1200,
-                unit: 'ml',
-                quantity: 500,
-                special: 'tặng 10 charm',
                 imageUrl: 'https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/dc6fdff15bd94d59a9467698fde7762f~tplv-o3syd03w52-origin-jpeg.jpeg?from=520841845',
                 name: '1200ml'
             },
@@ -100,82 +86,77 @@ const charms: ICharm[] = [
 ];
 
 const CharmList = () => {
-    const [selectedCharm, setSelectedCharm] = useState<Charm>();
-    const [isOpenedBottomSheet, setIsOpenedBottomSheet] = useState<boolean>(false);
+    const [selectedCharm, setSelectedCharm] = useState<Product>();
     const [quantity, setQuantity] = useState<number>(1);
 
     const { add: handleAddToCart } = useCartStore();
+    const { closeCart, openCart, isOpened } = useBottomSheetStore();
+    const { selectedNav } = useNavStore();
+
 
     const handleClickBuy = () => {
         console.log('buy');
     };
 
-    const handleClickAddToCart = (charmItem: Charm) => {
-        setIsOpenedBottomSheet(true);
+    const handleClickAddToCart = (charmItem: Product) => {
+        openCart();
         setSelectedCharm(charmItem);
         setQuantity(1);
     };
 
-    const handleCloseBottomSheet = () => {
-        setIsOpenedBottomSheet(false);
-    };
-
-    const handleQuantityClick = (quantityInput: number) => {
-        if ((quantity === 1 && quantityInput < 0) || (quantity > (selectedCharm?.quantity || 0) && quantityInput > 0)) return;
-        setQuantity((prevState) => prevState + quantityInput);
-    };
-
-    const handleQuantityChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const value = e.target.value;
-        setQuantity(+value);
-    };
-
     const handleClickAddToCartInBottomSheet = () => {
-        setIsOpenedBottomSheet(false);
+        closeCart();
         if (selectedCharm) {
-            handleAddToCart(selectedCharm);
+            handleAddToCart(selectedCharm, quantity);
         }
+    };
+
+    const getCharmItemJSX = (charm: Product) => {
+        return (<CharmItem
+            isActive={(isOpened && selectedCharm?.id === charm.id) ? true : false}
+            key={charm.id}
+            charm={charm}
+            onClickBuy={handleClickBuy}
+            onClickAddToCart={handleClickAddToCart} />);
     };
 
 
     return (
-        <div className=''>
+        <>
             <ul className='grid grid-cols-2 gap-x-4 gap-y-8  sm:grid-cols-3 lg:grid-cols-4'>
                 {
-                    charms.map(charm => (
-                        <CharmItem
-                            isActive={(isOpenedBottomSheet && selectedCharm?.id === charm.id) ? true : false}
-                            key={charm.id}
-                            charm={charm}
-                            onClickBuy={handleClickBuy}
-                            onClickAddToCart={handleClickAddToCart} />
-                    ))
+                    items.map(charm => {
+                        if (selectedNav === ProductCategoryType.ALL || charm.category === selectedNav) {
+                            return getCharmItemJSX(charm);
+                        }
+                        if (charm.category !== selectedNav) {
+                            return null
+                        }
+                    })
                 }
             </ul>
-            <BottomSheet
-                onClickCloseButton={handleCloseBottomSheet}
-                isOpened={isOpenedBottomSheet}>
+            <BottomSheet>
 
-                <div className='flex flex-col w-full gap-4 overflow-y-auto scrollbar pb-2'>
+                <div className='shrink-0 mb-8 min-w-0 p-0 m-0 flex flex-col'>
                     {/* Header */}
-                    <div className='flex flex-row justify-stretch w-full gap-2 sticky top-0 pb-4 border-b bg-white shadow-sm'>
+                    <div className='flex flex-row w-full p-4 justify-stretch gap-2 sticky top-0 border-b shadow-sm'>
                         {
                             selectedCharm &&
                             <Image width={100} height={100} src={selectedCharm.imageUrl} alt={selectedCharm.name} />
                         }
                         <div>
-                            <p className="text-red-500 text-lg ">{selectedCharm?.getPriceFormat()}</p>
-                            <span className='text-sm'>Kho: {selectedCharm?.quantity}</span>
+                            <p className="text-red-500 text-lg ">{formatCurrency(selectedCharm?.price || 0)}</p>
+                            <span className='text-sm'>Kho: {selectedCharm?.capacity}</span>
                         </div>
                     </div>
                     {/* Category */}
                     {
                         selectedCharm && selectedCharm.items.length > 0 &&
-                        <div className='flex flex-col gap-2 bg-white border-b pb-4'>
+                        <div className='flex flex-col p-4 justify-stretch gap-2 sticky top-0 border-b shadow-sm'>
                             <h3>Phân Loại</h3>
                             <div className='flex flex-row flex-wrap gap-4 '>
-                                {selectedCharm.items.map((item, index) => (
-                                    <div key={index} className='flex items-center bg-stone-50 p-2 gap-2 shadow-sm border rounded-md hover:bg-slate-300 hover:scale-105 hover:shadow-md transition-all duration-300'>
+                                {selectedCharm.items.map((item: ProductItem, index: number) => (
+                                    <div key={index} className='flex items-center bg-stone-50 p-2 gap-2 shadow-sm border rounded-md hover:bg-primary-color hover:scale-105 hover:shadow-md transition-all duration-300'>
                                         <Image className='rounded-tl-md rounded-bl-md' width={40} height={40} src={item.imageUrl} alt={item.name} />
                                         <p className='overflow-hidden text-ellipsis whitespace-nowrap'>{item.name}</p>
                                     </div>
@@ -185,40 +166,24 @@ const CharmList = () => {
                         </div>
                     }
                     {/* Quantity */}
-                    <div className='flex flex-col gap-2 bg-white border-b pb-4'>
-                        <h3>Số Lượng</h3>
-                        <div className='flex flex-row items-center justify-center gap-2'>
-                            <button
-                                className="w-8 h-8 p-2 bg-neutral-800 rounded-full justify-center items-center gap-2 inline-flex"
-                                type="button"
-                                onClick={() => handleQuantityClick(-1)}
-                            >
-                                <MinusIcon />
-                            </button>
-                            {/* Input */}
-
-                            <input inputMode="numeric" pattern="[0-9]*" type="text"
-                                value={quantity} onChange={(e) => handleQuantityChange(e)}
-                                className="w-[65px] h-12 p-3 bg-white rounded border border-zinc-200 basis-0 text-center text-gray-500 text-base font-normal leading-normal" />
-
-                            <button
-                                className="w-8 h-8 p-2 bg-neutral-800 rounded-full justify-center items-center gap-2 inline-flex"
-                                type="button"
-                                onClick={() => handleQuantityClick(1)}
-                            >
-                                <PlusIcon />
-                            </button>
-                        </div>
-                    </div>
+                    <Counter
+                        quantity={quantity}
+                        maxQuantity={selectedCharm?.capacity || 1}
+                        onClickIncrease={() => setQuantity((preState) => preState + 1)}
+                        onClickDecrease={() => setQuantity((preState) => preState - 1)}
+                        onChangeQuantity={(value) => setQuantity(value)} />
                 </div>
                 {/* Add To Cart */}
-                <div className='left-0 right-0 bg-white pt-4 w-full sticky bottom-0 z-10'>
+                <button onClick={handleClickAddToCartInBottomSheet} className="sticky bottom-4 text-white p-4 text-center text-lg font-semibold whitespace-nowrap justify-center items-center bg-primary-color mb-4 mx-4 rounded-xl">
+                    Thêm Vào Giỏ Hàng
+                </button>
+                {/* <div className='left-0 right-0 bg-white pt-4 w-full sticky bottom-0 z-10'>
                     <ButtonWithIcon color={'success'} onClick={handleClickAddToCartInBottomSheet} >
                         <p className="text-lg">Thêm Vào Giỏ Hàng</p>
                     </ButtonWithIcon>
-                </div>
+                </div> */}
             </BottomSheet>
-        </div>
+        </>
     );
 };
 
