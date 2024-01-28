@@ -9,12 +9,17 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      boxShadow: {
+        'xcard': 'box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25)'
+      },
       colors: {
         "primary-color": "var(--primary-color)",
         "secondary-color": "var(--secondary-color)",
         "third-color": "var(--third-color)",
         "forth-color": "var(--forth-color)",
-        "fifth-color": "var(--fifth-color)"
+        "fifth-color": "var(--fifth-color)",
+        "font-color": "var(--font-color)",
+        "background-color": "var(--background-color)"
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',

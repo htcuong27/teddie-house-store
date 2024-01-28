@@ -12,7 +12,6 @@
 
 
 :root {
-  --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
   --primary-color: #ca8360;
@@ -20,6 +19,9 @@
   --third-color: #DB8B4A;
   --forth-color: #DEB38D;
   --fifth-color: #9C9771;
+  --border-color: #C4C4C4;
+  --background-color:#F8F8F8;
+  --font-color: #0E0E0E;
 }
 
 html, body {
@@ -29,7 +31,7 @@ html, body {
 
 
 body {
-  color: rgb(var(--foreground-rgb));
+  color: var(--font-color);
   -webkit-font-smoothing: antialiased;
   position: relative;
   overscroll-behavior: none;
