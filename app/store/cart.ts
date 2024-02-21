@@ -1,4 +1,4 @@
-import { Product } from '@/models/Product';
+import { Product } from '@/app/models/Product';
 import { create } from 'zustand';
 
 interface CartItem extends Product {

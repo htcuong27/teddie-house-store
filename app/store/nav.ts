@@ -1,4 +1,4 @@
-import { ProductCategory, ProductCategoryType } from '@/models/Product';
+import { ProductCategory, ProductCategoryType } from '@/app/models/Product';
 import { create } from 'zustand';
 
 type NavStore = {

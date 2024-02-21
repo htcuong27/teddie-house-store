@@ -2,7 +2,7 @@
 import { formatCurrency } from "@/app/lib/utils";
 import { useCartStore } from "@/app/store/cart";
 import Counter from "@/app/ui/Counter";
-import type { Product } from "@/models/Product";
+import type { Product } from "@/app/models/Product";
 import { InformationCircleIcon } from "@heroicons/react/24/outline";
 import { Alert, Button, Card, CardBody, CardFooter, Typography } from "@material-tailwind/react";
 import { AnimatePresence, motion } from "framer-motion";

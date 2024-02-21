@@ -1,6 +1,6 @@
 'use client';
 
-import { ProductCategoryType } from "@/models/Product";
+import { ProductCategoryType } from "@/app/models/Product";
 import { useCartStore } from "@/app/store/cart";
 import { useNavStore } from "@/app/store/nav";
 import { Bars3Icon, ChevronDownIcon, ShoppingCartIcon, XMarkIcon } from "@heroicons/react/24/outline";

@@ -4,7 +4,7 @@ import { useBottomSheetStore, useCartStore } from '@/app/store/cart';
 import { useNavStore } from '@/app/store/nav';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { Product, ProductCategoryType } from '../../models/Product';
+import { Product, ProductCategoryType } from '../models/Product';
 import BottomSheet from './BottomSheet/BottomSheet';
 import Counter from './Counter';
 import ProductItem from './ProductItem';

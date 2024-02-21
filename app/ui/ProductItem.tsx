@@ -2,7 +2,7 @@ import { Card, CardBody, CardFooter, CardHeader, Typography } from '@material-ta
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Product } from '../../models/Product';
+import { Product } from '../models/Product';
 import { formatCurrency } from '../lib/utils';
 
 type ProductItemProps = {
