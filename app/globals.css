@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 0;
+    height: 0;
+  }
+}
+
+:root {
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+  --primary-color: #ca8360;
+  --secondary-color: #735a32;
+  --third-color: #db8b4a;
+  --forth-color: #deb38d;
+  --fifth-color: #9c9771;
+  --border-color: #c4c4c4;
+  --font-color: #0e0e0e;
+  --alice-blue: #DCEDFF;
+  --powder-blue: #94B0DA;
+  --cool-gray: #8F91A2;
+  --davy-gray: #505A5B;
+  --outer-space: #343F3E;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--alice-blue);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: smooth;
+}
+
+img {
+  object-fit: cover;
+}
