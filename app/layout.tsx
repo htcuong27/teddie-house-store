@@ -1,3 +1,4 @@
+"use client";
 import Header from '@/app/ui/header';
 import type { Metadata } from 'next';
 import { Roboto } from 'next/font/google';
