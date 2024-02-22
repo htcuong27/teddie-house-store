@@ -1,9 +1,9 @@
-import { Card, CardBody, CardFooter, CardHeader, Typography } from '@material-tailwind/react';
+import { Card, CardBody, CardHeader, Typography } from '@material-tailwind/react';
 import classNames from 'classnames';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Product } from '../models/Product';
 import { formatCurrency } from '../lib/utils';
+import { Product } from '../models/Product';
 
 type ProductItemProps = {
   onClickBuy: () => void;
@@ -28,25 +28,25 @@ const ProductItem = ({
 
   return (
     <Link href={`/product/${product.id}`}>
-      <Card shadow={true} className="w-full group hover:shadow-none relative">
-        <CardHeader shadow={false} floated={false} className="relative pb-[100%]">
+      <Card shadow={true} className="group hover:shadow-none">
+        <CardHeader shadow={false} floated={false} className="">
           <Image
             src={product.imageUrl}
-            width={200}
-            height={200}
+            width={322}
+            height={322}
             alt="card-image"
-            className="absolute w-full object-cover group-hover:scale-105"
+            className="object-cover w-full h-full  group-hover:scale-105"
           />
         </CardHeader>
-        <CardBody>
-          <Typography variant='h5' color="gray" className="line-clamp-2 h-[55px] text-center">
+        <CardBody className='p-0 pb-2 px-4 leading-[1.6] mt-1'>
+          <Typography variant='h3' color="gray" className="text-sm truncate font-normal tracking-tight mb-[3px]">
             {product.name}
           </Typography>
-        </CardBody>
-        <CardFooter className='pt-0'>
-          <Typography variant='h6' className="font-bold text-center text-black">
+          <Typography variant='paragraph' className="font-bold">
             {formatCurrency(product.price)}
           </Typography>
+        </CardBody>
+          
           {/* <Button
             fullWidth={true}
             className="bg-blue-gray-900/10 text-blue-gray-900 shadow-none hover:scale-105 hover:shadow-none focus:scale-105 focus:shadow-none active:scale-100"
@@ -54,7 +54,6 @@ const ProductItem = ({
           >
             Thêm vào Giỏ
           </Button> */}
-        </CardFooter>
       </Card>
     </Link>
     // <Link href={`/product/${product.id}`} className='p-5 bg-white rounded-3xl shadow-xl transition-all ease-linear duration-300 hover:shadow-none cursor-pointer'>

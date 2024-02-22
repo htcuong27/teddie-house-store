@@ -4,11 +4,11 @@ import { useBottomSheetStore, useCartStore } from '@/app/store/cart';
 import { useNavStore } from '@/app/store/nav';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import { formatCurrency } from '../lib/utils';
 import { Product, ProductCategoryType } from '../models/Product';
 import BottomSheet from './BottomSheet/BottomSheet';
 import Counter from './Counter';
 import ProductItem from './ProductItem';
-import { formatCurrency } from '../lib/utils';
 
 const ProductList = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product>();
@@ -74,7 +74,7 @@ const ProductList = () => {
 
   return (
     <>
-      <div className='py-10 px-0 sm:px-10 grid grid-cols-2 gap-x-10 gap-y-8 sm:grid-cols-2  md:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 '>
+      <div className='p-3 pt-1 -mt-1 grid grid-cols-2 gap-x-6 gap-y-[3%] sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 '>
       {data &&
           data.map((charm) => {
             if (
